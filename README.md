@@ -6,7 +6,7 @@ Apple stock prediction using the best (**polynomial3 regression** in this case).
 ![prediction](./prediction.png)
 
 ## usage
-See config.py, to choose a company **{apple, microsoft, ge, ibm, google}** and choose a date to predict and number of days to predict from that date.
+See config.py, to choose a company **{apple, microsoft, ge, ibm, google}** and choose a date to predict the price and number of days to predict from that date.
 ```shell
 $ python predict.py
 ```

@@ -20,12 +20,12 @@ start = datetime.datetime(2011, 1, 1)
 end = datetime.datetime(2019, 9, 4)
 df = web.DataReader("AAPL", 'yahoo', start, end)
 
-#stock price prediction
+#create a dataframe for stock price prediction
 dfreg = df.loc[:,['Adj Close','Volume']]
 dfreg['HL_PCT'] = (df['High'] - df['Low']) / df['Close'] * 100.0
 dfreg['PCT_change'] = (df['Close'] - df['Open']) / df['Open'] * 100.0
 
-#PRE-PROCESS AND CROSS VALIDATE:
+#PRE-PROCESS 
 # drop missing value
 dfreg.dropna(inplace=True)
 

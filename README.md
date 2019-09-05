@@ -11,5 +11,7 @@ See config.py, to choose a company **{apple, microsoft, ge, ibm, google}** and c
 $ python predict.py
 ```
 ## Requirements
-python3 and see requirement.txt
-
+python3 and see requirements.txt
+```shell
+pip install -r requirements.txt
+```

@@ -106,8 +106,8 @@ for i in forecast_set:
     next_date = next_unix
     next_unix += datetime.timedelta(days=1)
     dfreg.loc[next_date] = [np.nan for _ in range(len(dfreg.columns)-1)]+[i]
-dfreg['Adj Close'].tail(500).plot()
-dfreg['Forecast'].tail(500).plot()
+dfreg['Adj Close'].tail(250).plot()
+dfreg['Forecast'].tail(250).plot()
 plt.legend(loc=4)
 plt.xlabel('Date')
 plt.ylabel('Price')

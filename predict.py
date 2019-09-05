@@ -11,14 +11,13 @@ import pandas as pd
 import numpy as np
 import pandas_datareader.data as web
 from pandas import Series, DataFrame
+import config as cf
 import datetime
 import operator
 import math
 
-# get the data
-start = datetime.datetime(2011, 1, 1)
-end = datetime.datetime(2019, 9, 4)
-df = web.DataReader("AAPL", 'yahoo', start, end)
+# create the dataframe
+df = web.DataReader(cf.company, 'yahoo', cf.start, cf.end)
 
 #create a dataframe for stock price prediction
 dfreg = df.loc[:,['Adj Close','Volume']]
@@ -30,7 +29,8 @@ dfreg['PCT_change'] = (df['Close'] - df['Open']) / df['Open'] * 100.0
 dfreg.dropna(inplace=True)
 
 # predict the stock price for the next 18th day
-forecast_out = int(math.ceil(0.01 * len(dfreg)))
+#forecast_out = int(math.ceil(0.01 * len(dfreg)))
+forecast_out = int(cf.days)
 
 # separating the label here, we want to predict the AdjClose
 forecast_col = 'Adj Close'

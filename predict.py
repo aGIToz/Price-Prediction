@@ -25,11 +25,10 @@ dfreg['HL_PCT'] = (df['High'] - df['Low']) / df['Close'] * 100.0
 dfreg['PCT_change'] = (df['Close'] - df['Open']) / df['Open'] * 100.0
 
 #PRE-PROCESS 
-# drop missing value
+# drop missing value rows
 dfreg.dropna(inplace=True)
 
-# predict the stock price for the next 18th day
-#forecast_out = int(math.ceil(0.01 * len(dfreg)))
+# predict the stock price for the next 18 days
 forecast_out = int(cf.days)
 
 # separating the label here, we want to predict the AdjClose
@@ -38,7 +37,6 @@ dfreg['label'] = dfreg[forecast_col].shift(-forecast_out)
 X = np.array(dfreg.drop(['label'], 1))
 
 # Scale the X so that everyone can have the same distribution for linear regression
-#X = preprocessing.scale(X)
 scaler =  preprocessing.StandardScaler()
 X = scaler.fit_transform(X)
 
@@ -72,7 +70,7 @@ clfknn.fit(X_train, y_train)
 clfbay = BayesianRidge()
 clfbay.fit(X_train, y_train)
 
-# get the accuracy of the models
+#get the accuracy of the models
 confidencereg = clfreg.score(X_test, y_test)
 confidencepoly2 = clfpoly2.score(X_test,y_test)
 confidencepoly3 = clfpoly3.score(X_test,y_test)
@@ -96,6 +94,7 @@ print("Forecasting and ploting for the 18 days...")
 # forecaste for the next 18 days
 forecast_set = dict2[best].predict(X_lately)
 dfreg['Forecast'] = np.nan
+print("The prediction for the next ", cf.days, "are: ", forecast_set)
 
 #plot 
 last_date = dfreg.iloc[-1].name
